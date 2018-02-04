@@ -7,16 +7,17 @@ and also satisfying requirements or not.
 Author: Alican Donmez - alicandonmez90@gmail.com.
 """
 
-import requests
 import logging
+from helpers import monitor_site
 
 logging.basicConfig(level=logging.DEBUG)
-logging.info('Program started successfully')
-
-url = 'http://www.alida.com.tr'
-req = 'Anasayfa'
 
 
-def ok_and_match(url, req):
-    response = requests.request('get', url)
-    return response.ok, bool(response.text.find(req))
+def main(*args, **kwargs):
+
+    logging.info('Program started successfully')
+
+
+
+if __name__ == '__main__':
+    main()
