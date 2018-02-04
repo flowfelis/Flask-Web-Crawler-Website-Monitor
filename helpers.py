@@ -17,4 +17,4 @@ def monitor_site(url, req):
     third element of tuple  -- elapsed second while fetching
     """
     response = requests.request('get', url)
-    return response.ok, False if response.text.find(req) == -1 else True, response.elapsed.total_seconds()
+    return str(response.ok), str(False if response.text.find(req) == -1 else True), response.elapsed.total_seconds()
