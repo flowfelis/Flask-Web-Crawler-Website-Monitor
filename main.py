@@ -50,22 +50,29 @@ def main(*args, **kwargs):
         with open(file) as handle_read:
             reader = csv.reader(handle_read)
             rownum = 0
-            handle_write = open('log.csv', 'a+')
+            handle_write = open('log.csv', 'a')
+            handle_write_last = open('log_last.csv', 'w')
             writer = csv.writer(handle_write)
+            writer_last = csv.writer(handle_write_last)
             logging.info('Write Starting at ' + current_datetime() + '...')
             writer.writerow(('TIME OF EXECUTION', current_datetime()))
+            writer_last.writerow(('TIME OF EXECUTION', current_datetime()))
             writer.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
+            writer_last.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
 
             for row in reader:
                 if rownum != 0:  # escape header
                     logging.info('{} => '.format(row[0]) + str(monitor_site(row[1], row[2])))
                     live, satisfy, elapsed_time = monitor_site(row[1], row[2])
                     writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
+                    writer_last.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
 
                 rownum += 1
             writer.writerow(('\n',))
+            writer_last.writerow(('\n',))
             handle_write.close()
-            logging.info('write completed. log.csv file is ready\n')
+            handle_write_last.close()
+            logging.info('write completed. log file is ready\n')
         time.sleep(interval)
 
 
