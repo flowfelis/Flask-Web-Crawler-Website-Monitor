@@ -1,7 +1,0 @@
-TIME OF EXECUTION,"04/February/2018, 19.56.57"
-NAME,URL,STATUS CODE,SATISFIED?,STRING,ELAPSED TIME
-google,https://www.google.com,200,False,hello world,0.197349
-facebook,https://www.facebook.com,200,True,welcome,0.269424
-linkedin,https://www.linkedin.com,200,False,naber,0.50102
-alida,http://www.alida.com.tr,200,False,ataturk,0.342186
-random,http://randomwebsite.com,Dead,False,alican,0
