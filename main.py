@@ -47,7 +47,7 @@ def main(*args, **kwargs):
 
     while True:
 
-        with open(file, newline='') as handle_read:
+        with open(file) as handle_read:
             reader = csv.reader(handle_read)
             rownum = 0
             handle_write = open('log.csv', 'w')
@@ -57,7 +57,7 @@ def main(*args, **kwargs):
             writer.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
 
             for row in reader:
-                if rownum != 0: # escape header
+                if rownum != 0:  # escape header
                     logging.info('{} => '.format(row[0]) + str(monitor_site(row[1], row[2])))
                     live, satisfy, elapsed_time = monitor_site(row[1], row[2])
                     writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
