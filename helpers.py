@@ -1,6 +1,7 @@
 """This module contains helper functions"""
 
 import requests
+from datetime import datetime
 
 
 def monitor_site(url, req):
@@ -16,5 +17,14 @@ def monitor_site(url, req):
     second element of tuple -- requirement satisfied?
     third element of tuple  -- elapsed second while fetching
     """
-    response = requests.request('get', url)
-    return str(response.ok), str(False if response.text.find(req) == -1 else True), response.elapsed.total_seconds()
+    try:
+        response = requests.request('get', url)
+        return str(response.status_code), str(False if response.text.find(req) == -1 else True),\
+            response.elapsed.total_seconds()
+    except:
+        return 'Dead', 'False', 0
+
+
+def current_datetime():
+    """Display current datetime in a nice format"""
+    return datetime.now().strftime('%d/%B/%Y, %H.%M.%S')
