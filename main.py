@@ -13,7 +13,7 @@ import sys
 import time
 from helpers import monitor_site, current_datetime
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def main(*args, **kwargs):
@@ -32,7 +32,6 @@ def main(*args, **kwargs):
         try:
             interval = int(sys.argv[1])
         except IndexError:
-            # interval = 60
             interval = 10
         except ValueError:
             print('interval must be an integer')
@@ -42,10 +41,9 @@ def main(*args, **kwargs):
             file = sys.argv[2]
         except IndexError:
             file = 'config.csv'
-        # file = sys.argv[1]
-        # if file[-1:-4:-1] != 'csv':
 
     logging.info('Program started successfully')
+    logging.info('\ninterval time --> {0}\nreading from --> {1}'.format(interval, file))
 
     while True:
 
@@ -54,16 +52,19 @@ def main(*args, **kwargs):
             rownum = 0
             handle_write = open('log.csv', 'w')
             writer = csv.writer(handle_write)
+            logging.info('Write Starting at ' + current_datetime() + '...')
             writer.writerow(('TIME OF EXECUTION', current_datetime()))
             writer.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
 
             for row in reader:
-                if rownum != 0:
+                if rownum != 0: # escape header
+                    logging.info('{} => '.format(row[0]) + str(monitor_site(row[1], row[2])))
                     live, satisfy, elapsed_time = monitor_site(row[1], row[2])
                     writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
 
                 rownum += 1
             handle_write.close()
+            logging.info('write completed. log.csv file is ready\n')
         time.sleep(interval)
 
 

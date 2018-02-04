@@ -1,3 +1,5 @@
 NAME,URL,REQUIREMENT STRING
 google,https://www.google.com,hello world
 facebook,https://www.facebook.com,welcome
+linkedin,https://www.linkedin.com,naber
+random,http://randomwebsite.com, randomstring
