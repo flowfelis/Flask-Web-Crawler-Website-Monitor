@@ -27,18 +27,18 @@
     <!--<p>This log was created on</p>-->
     <h4 class="space">{{ datetime }}</h4>
   <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>{{ header[0] }}</th>
-        <th>{{ header[1] }}</th>
-        <th>{{ header[2] }}</th>
-        <th>{{ header[3] }}</th>
-        <th>{{ header[4] }}</th>
-        <th>{{ header[5] }}</th>
-      </tr>
-    </thead>
-    <tbody>
     {% for row in reader %}
+    <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>{{ header[0] }}</th>-->
+        <!--<th>{{ header[1] }}</th>-->
+        <!--<th>{{ header[2] }}</th>-->
+        <!--<th>{{ header[3] }}</th>-->
+        <!--<th>{{ header[4] }}</th>-->
+        <!--<th>{{ header[5] }}</th>-->
+      <!--</tr>-->
+    <!--</thead>-->
+    <tbody>
       <tr>
         <td>{{ row[0] }}</td>
         <td>{{ row[1] }}</td>

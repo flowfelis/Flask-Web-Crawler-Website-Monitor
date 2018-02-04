@@ -50,7 +50,7 @@ def main(*args, **kwargs):
         with open(file) as handle_read:
             reader = csv.reader(handle_read)
             rownum = 0
-            handle_write = open('log.csv', 'w')
+            handle_write = open('log.csv', 'a+')
             writer = csv.writer(handle_write)
             logging.info('Write Starting at ' + current_datetime() + '...')
             writer.writerow(('TIME OF EXECUTION', current_datetime()))
@@ -63,6 +63,7 @@ def main(*args, **kwargs):
                     writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
 
                 rownum += 1
+            writer.writerow(('\n',))
             handle_write.close()
             logging.info('write completed. log.csv file is ready\n')
         time.sleep(interval)

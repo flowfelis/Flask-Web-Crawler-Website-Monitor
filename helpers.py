@@ -22,7 +22,7 @@ def monitor_site(url, req):
         return str(response.status_code), str(False if response.text.find(req) == -1 else True),\
             response.elapsed.total_seconds()
     except:
-        return 'Dead', 'False', 0
+        return 'Down', 'False', 0
 
 
 def current_datetime():
