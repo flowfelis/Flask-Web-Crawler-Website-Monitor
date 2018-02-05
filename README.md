@@ -45,5 +45,8 @@ program takes 2 optional command line arguments:
   (Or just fill the first line with dummy data) 
   Program will start checking, starting from 2nd line.
   
+  
+  Last thing to note is that, **custom config file** shouldn't have any empty lines.
+
 
 Thank you
