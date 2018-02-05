@@ -3,6 +3,9 @@ Monitors given websites for being live/down and if satisfies requirements
 
 
 ## Website Part
+Only the last most current periodic check is displayed on the website.
+
+
 gunicorn is chosen to serve the website. Therefore you need to have gunicorn installed on your system.
 In order to install gunicorn, just do `pip3 install gunicorn`
 
@@ -13,6 +16,9 @@ You can start the server by typing in your terminal while in the project's file 
 Now website is being served on localhost:8000
 
 ## Command Line Part
+All periodic checks are stored on log.csv.
+
+
 You can start the program by typing in your terminal while in the project's file system => `./monitor.py`
 
 
