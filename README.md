@@ -31,7 +31,7 @@ program takes 2 optional command line arguments:
 * arg1 -- time interval in seconds. Default: 10 seconds. For example `./monitor.py 60`
 * arg2 -- configuration file in csv extension to read in. Default: config.csv for example `./monitor.py 15 my_config_file.csv`
 
-  Please note if custom config file is given, custom file's first line shouldn't contain any data. Because that's 
+  Please note **if custom config file is given** (*if you use default config.csv, no need to do anything*), custom file's first line shouldn't contain any data. Because that's 
   reserved for header row.
   
   
