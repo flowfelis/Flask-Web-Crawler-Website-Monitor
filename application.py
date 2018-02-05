@@ -13,8 +13,3 @@ def index():
     header = reader.__next__()
     return render_template('index.html', reader=reader, datetime=datetime,
                            header=header)
-    # return render_template('index.html', reader=reader)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)

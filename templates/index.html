@@ -18,37 +18,57 @@
         .center {
             text-align: center;
         }
+
     </style>
 </head>
 <body>
 
 <div class="container-fluid center">
-  <h2 class="space">Latest Log Information from Monitored Websites</h2>
+    <h1 class="space">Monitored Websites</h1>
+    <h2 class="space">Last Status</h2>
     <h4 class="space">{{ datetime }}</h4>
     <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>{{ header[0] }}</th>
-        <th>{{ header[1] }}</th>
-        <th>{{ header[2] }}</th>
-        <th>{{ header[3] }}</th>
-        <th>{{ header[4] }}</th>
-        <th>{{ header[5] }}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for row in reader %}
-      <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
-        <td>{{ row[5] }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+        <thead>
+        <tr>
+            <th>{{ header[0] }}</th>
+            <th>{{ header[1] }}</th>
+            <th>{{ header[2] }}</th>
+            <th>{{ header[3] }}</th>
+            <th>{{ header[4] }}</th>
+            <th>{{ header[5] }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in reader %}
+        <tr>
+            <td>{{ row[0]|upper }}</td>
+            <td class="text-primary"><a target="_blank" href="{{ row[1] }}">{{ row[1] }}</a></td>
+            <td
+                {% if row[2] == 'Down' %}
+                    class="text-danger"
+                {% elif row[2] == '200' %}
+                    class="text-success"
+                {% endif %}>
+                {{ row[2] }}
+            </td>
+
+            <td
+                {% if row[3] == 'False' %}
+                    class="text-danger"
+                {% elif row[3] == 'True' %}
+                    class="text-success"
+                {% else %}
+                    class="text-primary"
+                {% endif %}>
+                {{ row[3] }}
+            </td>
+
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 </body>

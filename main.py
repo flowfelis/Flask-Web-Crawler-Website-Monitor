@@ -13,17 +13,18 @@ import sys
 import time
 from helpers import monitor_site, current_datetime
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 
-def main(*args, **kwargs):
+def main():
 
-    # limit command line arguments to 2
+    # complain if more than 2 arguments are given
     if len(sys.argv) > 3:
         print('''
         Usage: main.py arg1 arg2
-        arg1 -- time interval in seconds. Default: 60 seconds
-        arg2 -- configuration file in csv extention. Default: config.csv
+        arg1 -- time interval in seconds. Default: 10 seconds
+        arg2 -- configuration file in csv extension. Default: config.csv
+            Please note to create a header line if custom config file is given.
         
         ''')
         sys.exit(1)
@@ -49,9 +50,9 @@ def main(*args, **kwargs):
 
         with open(file) as handle_read:
             reader = csv.reader(handle_read)
-            rownum = 0
-            handle_write = open('log.csv', 'a')
-            handle_write_last = open('log_last.csv', 'w')
+            rownum = 0  # to escape header row
+            handle_write = open('log.csv', 'a')  # for log.csv file
+            handle_write_last = open('log_last.csv', 'w')  # for displaying last status on html
             writer = csv.writer(handle_write)
             writer_last = csv.writer(handle_write_last)
             logging.info('Write Starting at ' + current_datetime() + '...')
@@ -66,13 +67,14 @@ def main(*args, **kwargs):
                     live, satisfy, elapsed_time = monitor_site(row[1], row[2])
                     writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
                     writer_last.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
+                    print('checking ' + row[0] + '...')
 
                 rownum += 1
-            writer.writerow(('\n',))
-            writer_last.writerow(('\n',))
+            writer.writerow(('\n' + '='*50 + '\n',))
             handle_write.close()
             handle_write_last.close()
-            logging.info('write completed. log file is ready\n')
+            logging.info('write completed. log file is ready')
+            print('')
         time.sleep(interval)
 
 
