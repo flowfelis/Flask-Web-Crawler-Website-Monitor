@@ -16,8 +16,7 @@ I used Flask with Jinja2, and Bootstrap for a nice visualization.
 Only the last most current periodic check is displayed on the website.
 
 
-gunicorn is chosen to serve the website. Therefore you need to have gunicorn installed on your system.
-If you don't, just do `pip3 install gunicorn`
+gunicorn is chosen to serve the website. If you don't have gunicorn, just do `pip3 install gunicorn` in terminal.
 
 
 You can start the server by typing in your terminal while in the project's file system => `gunicorn application:app`
