@@ -43,8 +43,14 @@ def main():
         except IndexError:
             file = 'config.csv'
 
-    logging.info('Program started successfully')
-    logging.info('\ninterval time --> {0}\nreading from --> {1}'.format(interval, file))
+    print('\nProgram started successfully')
+    time.sleep(.5)
+    print('interval time --> {}'.format(interval))
+    time.sleep(.5)
+    print('reading from --> {}'.format(file))
+    time.sleep(.5)
+    print('Hit <ctrl>C to quit\n')
+    time.sleep(.5)
 
     while True:
         with open(file) as handle_read:
