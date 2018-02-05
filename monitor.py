@@ -47,43 +47,42 @@ def main():
     logging.info('\ninterval time --> {0}\nreading from --> {1}'.format(interval, file))
 
     while True:
-        try:
-            try:
-                with open(file) as handle_read:
-                    reader = csv.reader(handle_read)
-                    rownum = 0  # to escape header row
-                    handle_write = open('log.csv', 'a')  # for log.csv file
-                    handle_write_last = open('log_last.csv', 'w')  # for displaying last status on html
-                    writer = csv.writer(handle_write)
-                    writer_last = csv.writer(handle_write_last)
-                    logging.info('Write Starting at ' + current_datetime() + '...')
-                    writer.writerow(('TIME OF EXECUTION', current_datetime()))
-                    writer_last.writerow(('TIME OF EXECUTION', current_datetime()))
-                    writer.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
-                    writer_last.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
+        with open(file) as handle_read:
+            reader = csv.reader(handle_read)
+            rownum = 0  # to escape header row
+            handle_write = open('log.csv', 'a')  # for log.csv file
+            handle_write_last = open('log_last.csv', 'w')  # for displaying last status on html
+            writer = csv.writer(handle_write)
+            writer_last = csv.writer(handle_write_last)
+            logging.info('Write Starting at ' + current_datetime() + '...')
+            writer.writerow(('TIME OF EXECUTION', current_datetime()))
+            writer_last.writerow(('TIME OF EXECUTION', current_datetime()))
+            writer.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
+            writer_last.writerow(('NAME', 'URL', 'STATUS CODE', 'SATISFIED?', 'STRING', 'ELAPSED TIME'))
 
-                    for row in reader:
-                        if rownum != 0:  # escape header
-                            logging.info('{} => '.format(row[0]) + str(monitor_site(row[1], row[2])))
-                            live, satisfy, elapsed_time = monitor_site(row[1], row[2])
-                            writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
-                            writer_last.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
-                            print('checking ' + row[0] + '...')
+            for row in reader:
+                if rownum != 0:  # escape header
+                    logging.info('{} => '.format(row[0]) + str(monitor_site(row[1], row[2])))
+                    live, satisfy, elapsed_time = monitor_site(row[1], row[2])
+                    writer.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
+                    writer_last.writerow((row[0], row[1], live, satisfy, row[2], elapsed_time))
+                    print('checking ' + row[0] + '...')
 
-                        rownum += 1
-                    writer.writerow(('\n' + '='*50 + '\n',))
-                    handle_write.close()
-                    handle_write_last.close()
-                    logging.info('write completed. log file is ready')
-                    print('')
-                time.sleep(interval)
-            except FileNotFoundError:
-                print('File Not Found. Please enter an existing file name with the csv extension')
-                sys.exit(1)
-        except KeyboardInterrupt:
-            print('\nThank you\nWhy don\'t you check your logs')
-            sys.exit(0)
+                rownum += 1
+            writer.writerow(('\n' + '='*50 + '\n',))
+            handle_write.close()
+            handle_write_last.close()
+            logging.info('write completed. log file is ready')
+            print('')
+        time.sleep(interval)
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\nThank you\nWhy don\'t you check your logs now')
+        sys.exit(0)
+    except FileNotFoundError:
+        print('File Not Found. Please enter an existing file name with the csv extension')
+        sys.exit(1)
