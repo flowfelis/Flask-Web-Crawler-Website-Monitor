@@ -3,6 +3,10 @@ Monitors given websites for being live/down and if satisfies requirements
 
 
 ## Website Part
+gunicorn is chosen to serve the website. Therefore you need to have gunicorn installed on your system.
+In order to install gunicorn, just do `pip3 install gunicorn`
+
+
 You can start the server by typing in your terminal while in the project's file system => `gunicorn application:app`
 
 
