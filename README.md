@@ -3,6 +3,9 @@ Monitors given websites for being live/down and if satisfies requirements
 
 
 ## Website Part
+I used Flask on the back-end, and Bootstrap on the front-end for nice visualization.
+
+
 Only the last most current periodic check is displayed on the website.
 
 
