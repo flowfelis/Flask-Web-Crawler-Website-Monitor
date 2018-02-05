@@ -4,6 +4,8 @@ Monitors given websites for being live/down and if satisfies requirements
 
 ## Website Part
 In order to run the server => `gunicorn application:app`
+
+
 Now website is being served on localhost:8000
 
 ## Command Line Part
