@@ -1,9 +1,16 @@
 # monitor-website
-Monitors given websites for being live/down and if satisfies requirements
+* Monitors web sites and reports their availability and verifies corresponding page
+content requirements from a configuration file.
+* Running `monitors.py`, creates a log.csv file that shows the progress of the periodic checks.
+* The checking period (by seconds) is configurable via a command-line option like => `monitors.py 60`
+* Single-page HTTP server interface is availabe via gunicorn, Flask with Jinja2 and Bootstrap.
+* The time it took for the web server to complete the whole request, is logged to log.csv.
+* Optinal csv file to read in can be given like `monitors.py 60 my_config_file.csv`
+If not given, default `config.csv` will be used for reading in.
 
 
 ## Website Part
-I used Flask on the back-end, and Bootstrap on the front-end for nice visualization.
+I used Flask with Jinja2, and Bootstrap for a nice visualization.
 
 
 Only the last most current periodic check is displayed on the website.
