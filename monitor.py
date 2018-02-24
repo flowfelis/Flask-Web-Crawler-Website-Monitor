@@ -7,7 +7,7 @@ and also satisfying requirements or not.
 Author: Alican Donmez - alicandonmez90@gmail.com.
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import logging
 import threading
 import csv
@@ -100,6 +100,9 @@ def main():
 
 if __name__ == '__main__':
     try:
+        flask = threading.Thread(target=app.run)
+        flask.daemon = True
+        flask.start()
         main()
     except KeyboardInterrupt:
         print('\nThank you\nWhy don\'t you check your logs now')
