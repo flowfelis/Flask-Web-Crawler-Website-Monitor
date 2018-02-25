@@ -1,41 +1,37 @@
-# monitor-website
-* Monitors web sites and reports their availability and verifies corresponding page
-content requirements from a configuration file.
-* Running `monitors.py`, creates a log.csv file that shows the progress of the periodic checks.
-* The checking period (by seconds) is configurable via a command-line option like => `monitors.py 60`
-* Single-page HTTP server interface is availabe via gunicorn, Flask with Jinja2 and Bootstrap.
-* The time it took for the web server to complete the whole request, is logged to log.csv.
-* Optinal csv file to read in can be given like `monitors.py 60 my_config_file.csv`
-If not given, default `config.csv` will be used for reading in.
+# Monitor-Website 
 
+## What Is It?
 
-## Website Part
-I used Flask with Jinja2, and Bootstrap for a nice visualization.
+* This is a helper program for Website Administrators.
+* It checks periodically websites that you defined in a .csv file.
+* Logs them to log.csv file.
+* Shows the last search results in a web page with a nice layout.
 
+## How Is It Helpful?
 
-Only the last most current periodic check is displayed on the website.
+* You can verify which websites are down or live.
+* You can verify if a website has the string you were searching for, in the response.
+* It creates a log file(log.csv) of all the websites it checked so far.
+* It opens a website for you to check the last search results.
+* Periodic checking time can be redefined in seconds.
 
+## How To Use It?
 
-gunicorn is chosen to serve the website. If you don't have gunicorn, just do `pip3 install gunicorn` in terminal.
+* You need to have Python installed before using. You can install it [here](https://www.python.org/downloads/).
+* Clone the repository to your file system.
+* Run `./monitor.py` within terminal. You should be in the directory where you cloned.
+    * Program will start with default parameters: 60 seconds interval time and input file of `config.csv`.
+    * This will serve a website at _http://127.0.0.1:5000/_ (I used `Flask` and `Bootstrap`).
+    * At the same time starts to fill up output log.csv file.
+    * I used Python's `threading` module to run 2 tasks in one file.
+* You can alternatively give 2 arguments:
+    * first argument: interval time of periodic checks(seconds).
+        * ie. -> `./monitor.py 120` (program runs, every 2 minutes.)
+    * second argument: optional input .csv file.
+        * ie. -> `./monitor.py 60 my_websites.csv` (program runs, every minute and reads from _my_websites.csv_)
+* Hit <ctrl-c> to stop the program.
 
-
-You can start the server by typing in your terminal while in the project's file system => `gunicorn application:app`
-
-
-Now website is being served on localhost:8000
-
-## Command Line Part
-All periodic checks are stored on log.csv.
-
-
-You can start the program by typing in your terminal while in the project's file system => `./monitor.py`
-
-
-program takes 2 optional command line arguments:
-
-
-* arg1 -- time interval in seconds. Default: 10 seconds. For example `./monitor.py 60`
-* arg2 -- configuration file in csv extension to read in. Default: config.csv for example `./monitor.py 15 my_config_file.csv`
+## Other Notes
 
   Please note **if custom config file is given** (*if you use default config.csv, no need to do anything*), custom file's first line shouldn't contain any data. Because that's 
   reserved for header row.
@@ -47,6 +43,8 @@ program takes 2 optional command line arguments:
   
   
   Last thing to note is that, **custom config file** shouldn't have any empty lines.
-
-
-Thank you
+  
+  Feel free to fork or pull-request.
+  
+  
+  Thank you
