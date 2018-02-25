@@ -29,7 +29,7 @@
         * ie. -> `./monitor.py 120` (program runs, every 2 minutes.)
     * second argument: optional input .csv file.
         * ie. -> `./monitor.py 60 my_websites.csv` (program runs, every minute and reads from _my_websites.csv_)
-* Hit <ctrl-c> to stop the program.
+* Hit `ctrl-c` to stop the program.
 
 ## Other Notes
 
